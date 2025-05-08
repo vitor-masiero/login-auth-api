@@ -1,13 +1,12 @@
-package com.example.login_auth_api.infra.security;
+package com.example.login_auth_api.application.service;
 
 import com.example.login_auth_api.domain.user.User;
-import com.example.login_auth_api.repositories.UserRepository;
+import com.example.login_auth_api.adapters.out.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 

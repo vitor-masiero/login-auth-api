@@ -1,4 +1,4 @@
-package com.example.login_auth_api.repositories;
+package com.example.login_auth_api.adapters.out.repositories;
 
 import com.example.login_auth_api.domain.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;

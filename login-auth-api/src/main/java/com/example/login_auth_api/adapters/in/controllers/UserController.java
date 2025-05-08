@@ -1,4 +1,4 @@
-package com.example.login_auth_api.controllers;
+package com.example.login_auth_api.adapters.in.controllers;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;

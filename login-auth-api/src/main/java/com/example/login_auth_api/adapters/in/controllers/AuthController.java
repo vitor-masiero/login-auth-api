@@ -1,17 +1,15 @@
-package com.example.login_auth_api.controllers;
+package com.example.login_auth_api.adapters.in.controllers;
 
 import com.example.login_auth_api.domain.user.User;
-import com.example.login_auth_api.dto.LoginRequestDTO;
-import com.example.login_auth_api.dto.RegisterRequestDTO;
-import com.example.login_auth_api.dto.ResponseDTO;
-import com.example.login_auth_api.infra.security.TokenService;
-import com.example.login_auth_api.repositories.UserRepository;
+import com.example.login_auth_api.adapters.in.dto.LoginRequestDTO;
+import com.example.login_auth_api.adapters.in.dto.RegisterRequestDTO;
+import com.example.login_auth_api.adapters.in.dto.ResponseDTO;
+import com.example.login_auth_api.application.service.TokenService;
+import com.example.login_auth_api.adapters.out.repositories.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

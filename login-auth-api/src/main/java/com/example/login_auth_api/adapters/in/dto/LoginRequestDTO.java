@@ -1,4 +1,4 @@
-package com.example.login_auth_api.dto;
+package com.example.login_auth_api.adapters.in.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
