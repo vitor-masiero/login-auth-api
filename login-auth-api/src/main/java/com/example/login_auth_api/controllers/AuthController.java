@@ -1,11 +1,12 @@
-package com.example.login_auth_api.adapters.in.controllers;
+package com.example.login_auth_api.controllers;
 
+import com.example.login_auth_api.domain.user.UserRole;
+import com.example.login_auth_api.dto.LoginRequestDTO;
+import com.example.login_auth_api.dto.RegisterRequestDTO;
+import com.example.login_auth_api.dto.ResponseDTO;
+import com.example.login_auth_api.service.TokenService;
+import com.example.login_auth_api.repositories.UserRepository;
 import com.example.login_auth_api.domain.user.User;
-import com.example.login_auth_api.adapters.in.dto.LoginRequestDTO;
-import com.example.login_auth_api.adapters.in.dto.RegisterRequestDTO;
-import com.example.login_auth_api.adapters.in.dto.ResponseDTO;
-import com.example.login_auth_api.application.service.TokenService;
-import com.example.login_auth_api.adapters.out.repositories.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,10 +30,11 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid LoginRequestDTO body) {
-        User user = this.repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
         if(passwordEncoder.matches(body.password(), user.getPassword())) {
+            UserRole role = body.role();
             String token = tokenService.generateToken(user);
-            return ResponseEntity.ok(new ResponseDTO(user.getName(), token));
+            return ResponseEntity.ok(new ResponseDTO(user.getName(), token, role));
         }
         return ResponseEntity.badRequest().build();
     }
@@ -45,10 +47,11 @@ public class AuthController {
             newUser.setPassword(passwordEncoder.encode(body.password()));
             newUser.setEmail(body.email());
             newUser.setName(body.name());
+            newUser.setRole(body.role());
             this.repository.save(newUser);
 
             String token = tokenService.generateToken(newUser);
-            return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token));
+            return ResponseEntity.ok(new ResponseDTO(newUser.getName(), token, newUser.getRole()));
 
         }
         return ResponseEntity.badRequest().build();

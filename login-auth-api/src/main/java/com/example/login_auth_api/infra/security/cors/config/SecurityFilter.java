@@ -1,8 +1,8 @@
-package com.example.login_auth_api.infrastructure.config;
+package com.example.login_auth_api.infra.security.cors.config;
 
 import com.example.login_auth_api.domain.user.User;
-import com.example.login_auth_api.application.service.TokenService;
-import com.example.login_auth_api.adapters.out.repositories.UserRepository;
+import com.example.login_auth_api.service.TokenService;
+import com.example.login_auth_api.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

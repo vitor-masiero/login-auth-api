@@ -1,4 +1,4 @@
-package com.example.login_auth_api.application.service;
+package com.example.login_auth_api.service;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -25,6 +25,7 @@ public class TokenService {
             String token = JWT.create()
                     .withIssuer("login-auth-api")
                     .withSubject(user.getEmail())
+                    .withClaim("role", user.getRole().name())
                     .withExpiresAt(this.generateExpirationDate())
                     .sign(algorithm);
             return token;

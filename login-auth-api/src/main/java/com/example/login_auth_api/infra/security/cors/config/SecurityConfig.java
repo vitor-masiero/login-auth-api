@@ -1,6 +1,6 @@
-package com.example.login_auth_api.infrastructure.config;
+package com.example.login_auth_api.infra.security.cors.config;
 
-import com.example.login_auth_api.application.service.CustomUserDetailsService;
+import com.example.login_auth_api.service.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
