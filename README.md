@@ -91,11 +91,11 @@ com.example.login_auth_api
 
 ### Registro de Usuário
 
-![Fluxograma de Registro](./WhatsApp Image 2025-05-08 at 21.38.16.jpeg)
+![Fluxograma de Registro](https://github.com/user-attachments/assets/ed135f7e-4386-4462-a88e-c7f1ae599704)
 
 ### Login de Usuário
 
-![Fluxograma de Login](./WhatsApp Image 2025-05-08 at 20.59.57.jpeg)
+![Fluxograma de Login](https://github.com/user-attachments/assets/06e7d330-072d-4385-aeb8-b201655cb04a)
 
 ## Endpoints
 
