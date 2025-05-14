@@ -1,14 +1,13 @@
 package com.example.login_auth_api.domain.fornecedor;
 
+import com.example.login_auth_api.domain.produto.Produto;
 import com.example.login_auth_api.domain.user.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
+import jakarta.persistence.*;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "tbfornecedor")
@@ -16,4 +15,11 @@ import java.time.LocalDateTime;
 @Setter
 
 public class Fornecedor extends User{
+
+    private String dsRazaoSocial;
+    private LocalDateTime dtHorarioFunc;
+
+    @OneToMany(mappedBy = "fornecedor", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Produto> produto;
+
 }

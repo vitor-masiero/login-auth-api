@@ -1,4 +1,4 @@
-package com.example.login_auth_api.infra.security.cors;
+package com.example.login_auth_api.infra.cors;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

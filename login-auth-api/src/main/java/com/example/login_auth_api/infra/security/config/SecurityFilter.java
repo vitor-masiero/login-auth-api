@@ -1,4 +1,4 @@
-package com.example.login_auth_api.infra.security.cors.config;
+package com.example.login_auth_api.infra.security.config;
 
 import com.example.login_auth_api.service.TokenService;
 import com.example.login_auth_api.repositories.UserRepository;

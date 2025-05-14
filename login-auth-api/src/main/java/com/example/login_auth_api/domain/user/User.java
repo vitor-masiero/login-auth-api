@@ -1,4 +1,5 @@
 package com.example.login_auth_api.domain.user;
+import com.example.login_auth_api.domain.endereco.Endereco;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,14 +29,18 @@ public class User implements UserDetails {
     private String dsSenha;
     private String nuCnpjCpf;
 
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Endereco> endereco;
+
     @Enumerated(EnumType.STRING)
     private UserRole enRole;
 
-    public User(String nm_usuario, String ds_email, String ds_senha_hash, UserRole enRole) {
-        this.nmUsuario = nm_usuario;
-        this.dsEmail = ds_email;
-        this.dsSenha = ds_senha_hash;
+    public User(String nmUsuario, String dsEmail, String dsSenha, UserRole enRole, String nuCnpjCpf) {
+        this.nmUsuario = nmUsuario;
+        this.dsEmail = dsEmail;
+        this.dsSenha = dsSenha;
         this.enRole = enRole;
+        this.nuCnpjCpf = nuCnpjCpf;
     }
 
     @Override

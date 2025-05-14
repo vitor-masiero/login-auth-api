@@ -42,7 +42,7 @@ public class AuthController {
         String token = tokenService.generateToken(user);
 
         return ResponseEntity.ok(
-                new ResponseDTO(token, user.getNmUsuario(), user.getEnRole())
+                new ResponseDTO(user.getNmUsuario(),token, user.getEnRole())
         );
 
         //User user = repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
@@ -58,7 +58,7 @@ public class AuthController {
     public ResponseEntity register(@RequestBody @Valid RegisterRequestDTO body) {
         if(this.repository.findByDsEmail(body.dsEmail()) != null) return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(body.dsSenha());
-        User newUser = new User(body.nmUsuario(), body.dsEmail(), encryptedPassword, body.enRole());
+        User newUser = new User(body.nmUsuario(), body.dsEmail(), encryptedPassword, body.enRole(), body.nuCnpjCpf());
 
         this.repository.save(newUser);
 
