@@ -1,7 +1,6 @@
 package com.example.login_auth_api.infra.security.cors.config;
 
-import com.example.login_auth_api.infra.security.cors.config.SecurityFilter;
-import com.example.login_auth_api.service.CustomUserDetailsService;
+import com.example.login_auth_api.service.AuthorizationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     @Autowired
-    private CustomUserDetailsService userDetailsService;
+    private AuthorizationService authorizationService;
 
     @Autowired
     SecurityFilter securityFilter;
@@ -29,7 +28,6 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                // NÃO usar .cors(), ele está obsoleto
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize

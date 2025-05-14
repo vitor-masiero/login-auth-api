@@ -10,16 +10,17 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 
-@Component
 
-    public class CustomUserDetailsService implements UserDetailsService {
+//@Component
 
-    @Autowired
-    private UserRepository userRepository;
+    //public class CustomUserDetailsService implements UserDetailsService {
 
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = this.userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), new ArrayList<>());
-    }
-}
+    //@Autowired
+    //private UserRepository userRepository;
+
+    //@Override
+    //public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+       // User user = this.userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        //return new org.springframework.security.core.userdetails.User(user.getDs_email(), user.getPassword(), new ArrayList<>());
+   // }
+//}

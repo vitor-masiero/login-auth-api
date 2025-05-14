@@ -1,5 +1,18 @@
 package com.example.login_auth_api.domain.user;
 
 public enum UserRole {
-    ROLE_CLIENTE, ROLE_ADMIN, ROLE_ENTREGADOR
+
+    CLIENTE("cliente"),
+    FORNECEDOR("fornecedor");
+
+    private String role;
+
+    UserRole(String role) {
+        this.role = role;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
 }

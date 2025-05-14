@@ -1,6 +1,5 @@
 package com.example.login_auth_api.infra.security.cors.config;
 
-import com.example.login_auth_api.domain.user.User;
 import com.example.login_auth_api.service.TokenService;
 import com.example.login_auth_api.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
@@ -9,13 +8,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-import java.util.Collections;
+
 
 @Component
 public class SecurityFilter extends OncePerRequestFilter {
@@ -26,13 +25,19 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        var token = this.recoverToken(request);
-        var login = tokenService.verifyToken(token);
+        String uri = request.getRequestURI();
 
-        if(login != null){
-            User user = userRepository.findByEmail(login).orElseThrow(() -> new RuntimeException("User Not Found"));
-            var authorities = Collections.singletonList(new SimpleGrantedAuthority(user.getRole().name()));
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, authorities);
+        if (uri.startsWith("/auth/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
+        var token = this.recoverToken(request);
+
+        if(token != null){
+            var login = tokenService.verifyToken(token);
+            UserDetails user = userRepository.findByEmail(login);
+            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
         filterChain.doFilter(request, response);
