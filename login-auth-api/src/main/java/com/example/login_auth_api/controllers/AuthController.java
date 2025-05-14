@@ -1,6 +1,5 @@
 package com.example.login_auth_api.controllers;
 
-import com.example.login_auth_api.domain.user.UserRole;
 import com.example.login_auth_api.dto.LoginRequestDTO;
 import com.example.login_auth_api.dto.RegisterRequestDTO;
 import com.example.login_auth_api.dto.ResponseDTO;
@@ -20,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Optional;
-
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
@@ -37,10 +34,16 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity login(@RequestBody @Valid LoginRequestDTO body) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(body.email(), body.password());
+
+        var usernamePassword = new UsernamePasswordAuthenticationToken(body.dsEmail(), body.dsSenha());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        return ResponseEntity.ok().build();
+        User user  = (User) auth.getPrincipal();
+        String token = tokenService.generateToken(user);
+
+        return ResponseEntity.ok(
+                new ResponseDTO(token, user.getNmUsuario(), user.getEnRole())
+        );
 
         //User user = repository.findByEmail(body.email()).orElseThrow(() -> new RuntimeException("User not found"));
         //if(passwordEncoder.matches(body.password(), user.getPassword())) {
@@ -53,9 +56,9 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid RegisterRequestDTO body) {
-        if(this.repository.findByEmail(body.email()) != null) return ResponseEntity.badRequest().build();
-        String encryptedPassword = new BCryptPasswordEncoder().encode(body.password());
-        User newUser = new User(body.name(), body.email(), encryptedPassword, body.role());
+        if(this.repository.findByDsEmail(body.dsEmail()) != null) return ResponseEntity.badRequest().build();
+        String encryptedPassword = new BCryptPasswordEncoder().encode(body.dsSenha());
+        User newUser = new User(body.nmUsuario(), body.dsEmail(), encryptedPassword, body.enRole());
 
         this.repository.save(newUser);
 

@@ -12,12 +12,13 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-@Table(name = "tbusuario")
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 
+@Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "tbusuario")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -28,30 +29,30 @@ public class User implements UserDetails {
     private String nuCnpjCpf;
 
     @Enumerated(EnumType.STRING)
-    private UserRole en_role;
+    private UserRole enRole;
 
-    public User(String nm_usuario, String ds_email, String ds_senha_hash, UserRole en_role) {
+    public User(String nm_usuario, String ds_email, String ds_senha_hash, UserRole enRole) {
         this.nmUsuario = nm_usuario;
         this.dsEmail = ds_email;
         this.dsSenha = ds_senha_hash;
-        this.en_role = en_role;
+        this.enRole = enRole;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.en_role == UserRole.FORNECEDOR) return List.of(new SimpleGrantedAuthority("ROLE_FORNECEDOR"));
+        if (this.enRole == UserRole.FORNECEDOR) return List.of(new SimpleGrantedAuthority("ROLE_FORNECEDOR"));
         else return List.of(new SimpleGrantedAuthority("ROLE_CLIENTE"));
 
     }
 
     @Override
     public String getPassword() {
-        return "";
+        return dsSenha;
     }
 
     @Override
     public String getUsername() {
-        return "";
+        return dsEmail;
     }
 
     @Override

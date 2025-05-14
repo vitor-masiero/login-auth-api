@@ -5,14 +5,14 @@ public enum UserRole {
     CLIENTE("cliente"),
     FORNECEDOR("fornecedor");
 
-    private String role;
+    private String enRole;
 
     UserRole(String role) {
-        this.role = role;
+        this.enRole = enRole;
     }
 
     public String getRole() {
-        return role;
+        return enRole;
     }
 
 }

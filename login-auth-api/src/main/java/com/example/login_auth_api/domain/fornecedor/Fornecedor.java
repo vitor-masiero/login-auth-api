@@ -14,12 +14,6 @@ import java.time.LocalDateTime;
 @Table(name = "tbfornecedor")
 @Getter
 @Setter
-@AllArgsConstructor
-@NoArgsConstructor
 
-public class Fornecedor extends User {
-    private String dsRazaoSocial;
-    private String dsCategoria;
-    private LocalDateTime dtHrFuncionamento;
-    private Double vlMinimoPedido;
+public class Fornecedor extends User{
 }

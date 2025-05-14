@@ -7,8 +7,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record RegisterRequestDTO(
-        @NotBlank String name,
-        @NotBlank @Email String email,
-        @NotBlank @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres")String password,
-        @NotNull UserRole role
+        @NotBlank String nmUsuario,
+        @NotBlank @Email String dsEmail,
+        @NotBlank @Size(min = 8, message = "A senha deve ter pelo menos 8 caracteres")String dsSenha,
+        @NotNull UserRole enRole
 ) {}
