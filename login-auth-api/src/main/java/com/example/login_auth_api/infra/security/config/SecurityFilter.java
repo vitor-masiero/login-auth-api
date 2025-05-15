@@ -32,17 +32,21 @@ public class SecurityFilter extends OncePerRequestFilter {
             return;
         }
 
-        var token = this.recoverToken(request);
-
-        if(token != null){
-            var login = tokenService.verifyToken(token);
-            UserDetails user = userRepository.findByDsEmail(login);
-            var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
-            SecurityContextHolder.getContext().setAuthentication(authentication);
+        try {
+            String token = recoverToken(request);
+            if (token != null) {
+                String login = tokenService.verifyToken(token);
+                UserDetails user = userRepository.findByDsEmail(login);
+                if (user != null) {
+                    var authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+                    SecurityContextHolder.getContext().setAuthentication(authentication);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Falha na autenticação via token: " + e.getMessage());
         }
         filterChain.doFilter(request, response);
     }
-
     private String recoverToken(HttpServletRequest request){
         var authHeader = request.getHeader("Authorization");
         if(authHeader == null) return null;

@@ -22,8 +22,11 @@ import java.util.List;
 @Table(name = "tbusuario")
 public class User implements UserDetails {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    private String idUsuario;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idUsuario")
+    private Integer idUsuario;
+
+    @Column(unique = true)
     private String dsEmail;
     private String nmUsuario;
     private String dsSenha;

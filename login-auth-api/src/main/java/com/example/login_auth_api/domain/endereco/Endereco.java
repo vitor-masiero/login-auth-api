@@ -15,7 +15,7 @@ import lombok.Setter;
 public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Integer id;
     private String dsLogradouro;
     private String nmNumero;
     private String dsComplemento;

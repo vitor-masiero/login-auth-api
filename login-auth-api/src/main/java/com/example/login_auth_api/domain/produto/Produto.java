@@ -17,8 +17,8 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 public class Produto {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private String idProduto;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer idProduto;
     private String nmProduto;
     private BigDecimal vlProduto;
     private String dsProduto;
