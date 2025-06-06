@@ -2,6 +2,7 @@ package com.example.login_auth_api.infra.security;
 
 import com.example.login_auth_api.domain.user.User;
 import com.example.login_auth_api.repositories.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,11 +13,11 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
 @Component
-
+@RequiredArgsConstructor
     public class CustomUserDetailsService implements UserDetailsService {
 
-    @Autowired
-    private UserRepository userRepository;
+
+    private final UserRepository userRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

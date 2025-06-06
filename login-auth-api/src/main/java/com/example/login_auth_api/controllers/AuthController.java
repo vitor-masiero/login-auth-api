@@ -9,9 +9,7 @@ import com.example.login_auth_api.repositories.UserRepository;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,7 +20,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
-//@PreAuthorize("hasRole('ADMIN')") - Anotação para cargos dentro do sistema
 
 public class AuthController {
     private final UserRepository repository;
@@ -47,6 +44,7 @@ public class AuthController {
             newUser.setPassword(passwordEncoder.encode(body.password()));
             newUser.setEmail(body.email());
             newUser.setName(body.name());
+            newUser.setRole(body.role());
             this.repository.save(newUser);
 
             String token = tokenService.generateToken(newUser);
