@@ -1,0 +1,23 @@
+info:
+  name: Update dados comuns
+  type: http
+  seq: 2
+
+http:
+  method: PUT
+  url: "{{baseURL}}/me"
+  body:
+    type: json
+    data: |-
+      {
+        "nome":"José da Silva",
+        "telefone":"4899064470",
+        "endereco":"Rua do Germando Siebert"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
