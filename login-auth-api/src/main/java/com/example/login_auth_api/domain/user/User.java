@@ -1,5 +1,6 @@
 package com.example.login_auth_api.domain.user;
 
+import com.example.login_auth_api.dto.request.auth.RegisterRequestDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,4 +26,14 @@ public class User {
 
     @Enumerated(EnumType.STRING)
     private UserRole role;
+
+    //Construtor para evitar boilerplate no Service
+    public User(RegisterRequestDTO data) {
+        this.name = data.nome();
+        this.email = data.email();
+        this.telefone = data.telefone();
+        this.endereco = data.endereco();
+        this.password = data.senha();
+        this.role = data.role();
+    }
 }

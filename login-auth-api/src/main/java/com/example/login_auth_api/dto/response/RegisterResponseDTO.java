@@ -7,6 +7,7 @@ public record RegisterResponseDTO(
         String email,
         String telefone,
         String endereco,
-        UserRole role
+        UserRole role,
+        String token
 ) {
 }
