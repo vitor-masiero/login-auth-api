@@ -19,7 +19,9 @@ public class User {
     private String id;
     private String email;
     private String name;
+    private String telefone;
     private String password;
+    private String endereco;
 
     @Enumerated(EnumType.STRING)
     private UserRole role;

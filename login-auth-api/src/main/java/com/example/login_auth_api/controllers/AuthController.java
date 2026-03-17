@@ -1,8 +1,8 @@
 package com.example.login_auth_api.controllers;
 
 import com.example.login_auth_api.domain.user.User;
-import com.example.login_auth_api.dto.LoginRequestDTO;
-import com.example.login_auth_api.dto.RegisterRequestDTO;
+import com.example.login_auth_api.dto.request.auth.LoginRequestDTO;
+import com.example.login_auth_api.dto.request.auth.RegisterRequestDTO;
 import com.example.login_auth_api.dto.ResponseDTO;
 import com.example.login_auth_api.infra.security.TokenService;
 import com.example.login_auth_api.repositories.UserRepository;
@@ -41,9 +41,9 @@ public class AuthController {
         Optional<User> user = this.repository.findByEmail(body.email());
         if(user.isEmpty()){
             User newUser = new User();
-            newUser.setPassword(passwordEncoder.encode(body.password()));
+            newUser.setPassword(passwordEncoder.encode(body.senha()));
             newUser.setEmail(body.email());
-            newUser.setName(body.name());
+            newUser.setName(body.nome());
             newUser.setRole(body.role());
             this.repository.save(newUser);
 
