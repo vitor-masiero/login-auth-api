@@ -49,7 +49,7 @@ public class AuthServiceLoginTest {
     }
 
     @Test
-    @DisplayName("Deve retornar token quando credenciais forem válidas")
+    @DisplayName("CT-08: Deve retornar token quando credenciais forem válidas")
     void deveRetornarTokenQuandoCredenciaisValidas() {
         var request = new LoginRequestDTO("joao@email.com", "senha123");
 
@@ -68,7 +68,7 @@ public class AuthServiceLoginTest {
     }
 
     @Test
-    @DisplayName("Deve lançar InvalidUserException quando e-mail não existir")
+    @DisplayName("CT-10: Deve lançar InvalidUserException quando e-mail não existir")
     void deveLancarExcecaoQuandoEmailNaoEncontrado() {
         var request = new LoginRequestDTO("naoexiste@email.com", "senha123");
 
@@ -84,7 +84,7 @@ public class AuthServiceLoginTest {
     }
 
     @Test
-    @DisplayName("Deve lançar InvalidUserException quando senha for incorreta")
+    @DisplayName("CT-09: Deve lançar InvalidUserException quando senha for incorreta")
     void deveLancarExcecaoQuandoSenhaIncorreta() {
         var request = new LoginRequestDTO("joao@email.com", "senha-errada");
 
@@ -99,6 +99,22 @@ public class AuthServiceLoginTest {
 
         // Token nunca deve ser gerado se a senha estiver errada
         verify(tokenService, never()).generateToken(any());
+    }
+
+    @Test
+    @DisplayName("CT-12: Mensagem de erro não revela se o email existe")
+    void deveRetornarMensagemDeErroGenerica() {
+        var request = new LoginRequestDTO("naoexiste@email.com", "senha123");
+
+        when(userRepository.findByEmail("naoexiste@email.com"))
+                .thenReturn(Optional.empty());              // e-mail não está no banco
+
+        assertThatThrownBy(() -> authService.login(request))
+                .isInstanceOf(InvalidUserException.class)
+                .hasMessage("Usuário ou senha inválidos");
+
+        // Se o e-mail não existe, nem deve tentar comparar a senha
+        verify(passwordEncoder, never()).matches(any(), any());
     }
 
 }

@@ -44,7 +44,7 @@ class AuthServiceRegisterTest {
     }
 
     @Test
-    @DisplayName("Deve retornar sucesso quando registra usuário com campos válidos")
+    @DisplayName("CT-01: Deve retornar sucesso quando registra usuário com campos válidos")
     void registrarUsuarioComCamposValidos() {
         var request = new RegisterRequestDTO(
                 "João Silva",
@@ -79,7 +79,7 @@ class AuthServiceRegisterTest {
     }
 
     @Test
-    @DisplayName("Deve lançar exceção quando e-mail já estiver cadastrado")
+    @DisplayName("CT-02: Deve lançar exceção quando e-mail já estiver cadastrado")
     void registrarDeveLancarExcecaoQuandoEmailJaExiste() {
         var request = new RegisterRequestDTO(
                 "João Silva",
