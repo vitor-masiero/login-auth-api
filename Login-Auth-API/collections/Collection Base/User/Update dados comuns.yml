@@ -5,14 +5,14 @@ info:
 
 http:
   method: PUT
-  url: "{{baseURL}}/me"
+  url: "{{baseURL}}/user/me"
   body:
     type: json
     data: |-
       {
         "nome":"José da Silva",
         "telefone":"4899064470",
-        "endereco":"Rua do Germando Siebert"
+        "endereco":"OIE"
       }
   auth: inherit
 
