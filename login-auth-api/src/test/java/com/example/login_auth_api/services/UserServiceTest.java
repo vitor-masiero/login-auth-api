@@ -69,8 +69,8 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("CT-29: updateUser deve persistir os dados atualizados e retornar o DTO correto")
-    void ct29_updateUser_devePersistirDadosAtualizadosERetornarDTO() {
+    @DisplayName("CT-26: updateUser deve persistir os dados atualizados e retornar o DTO correto")
+    void ct26_updateUser_devePersistirDadosAtualizadosERetornarDTO() {
         var dto = new UserUpdateDTO("Novo Nome", "11999999999", "Nova Rua, 100");
 
         when(userRepository.findById("user-id-1"))
@@ -104,8 +104,8 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("CT-34: delete deve chamar o repositório uma vez com o objeto correto")
-    void ct34_delete_deveChamarRepositorioUmaVezComUsuarioCorreto() {
+    @DisplayName("CT-29: delete deve chamar o repositório uma vez com o objeto correto")
+    void ct29_delete_deveChamarRepositorioUmaVezComUsuarioCorreto() {
         when(userRepository.findById("user-id-1"))
                 .thenReturn(Optional.of(usuarioExistente));
         doNothing().when(userRepository).delete(any());
@@ -119,8 +119,8 @@ class UserServiceTest {
     }
 
     @Test
-    @DisplayName("CT-35: delete deve lançar ResourceNotFoundException quando ID não existir")
-    void ct35_delete_deveLancarExcecaoQuandoIdNaoExistir() {
+    @DisplayName("CT-30: delete deve lançar ResourceNotFoundException quando ID não existir")
+    void ct30_delete_deveLancarExcecaoQuandoIdNaoExistir() {
         when(userRepository.findById("id-inexistente"))
                 .thenReturn(Optional.empty());
 

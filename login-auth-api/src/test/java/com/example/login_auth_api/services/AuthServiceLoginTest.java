@@ -50,7 +50,7 @@ public class AuthServiceLoginTest {
 
     @Test
     @DisplayName("CT-08: Deve retornar token quando credenciais forem válidas")
-    void deveRetornarTokenQuandoCredenciaisValidas() {
+    void ct08_deveRetornarTokenQuandoCredenciaisValidas() {
         var request = new LoginRequestDTO("joao@email.com", "senha123");
 
         when(userRepository.findByEmail("joao@email.com"))
@@ -69,7 +69,7 @@ public class AuthServiceLoginTest {
 
     @Test
     @DisplayName("CT-10: Deve lançar InvalidUserException quando e-mail não existir")
-    void deveLancarExcecaoQuandoEmailNaoEncontrado() {
+    void ct10_deveLancarExcecaoQuandoEmailNaoEncontrado() {
         var request = new LoginRequestDTO("naoexiste@email.com", "senha123");
 
         when(userRepository.findByEmail("naoexiste@email.com"))
@@ -85,7 +85,7 @@ public class AuthServiceLoginTest {
 
     @Test
     @DisplayName("CT-09: Deve lançar InvalidUserException quando senha for incorreta")
-    void deveLancarExcecaoQuandoSenhaIncorreta() {
+    void ct09_deveLancarExcecaoQuandoSenhaIncorreta() {
         var request = new LoginRequestDTO("joao@email.com", "senha-errada");
 
         when(userRepository.findByEmail("joao@email.com"))
@@ -103,7 +103,7 @@ public class AuthServiceLoginTest {
 
     @Test
     @DisplayName("CT-12: Mensagem de erro não revela se o email existe")
-    void deveRetornarMensagemDeErroGenerica() {
+    void ct12_deveRetornarMensagemDeErroGenerica() {
         var request = new LoginRequestDTO("naoexiste@email.com", "senha123");
 
         when(userRepository.findByEmail("naoexiste@email.com"))

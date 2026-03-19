@@ -1,7 +1,7 @@
 info:
   name: Register - USER
   type: http
-  seq: 3
+  seq: 4
 
 http:
   method: POST
@@ -11,7 +11,7 @@ http:
     data: |-
       {
         "nome": "José Masiero",
-        "email": "jose@gmail.com",
+        "email": "usuario@gmail.com",
         "telefone": "11999999999",
         "endereco": "Rua das Flores, 123",
         "senha": "senhadeusuario123",

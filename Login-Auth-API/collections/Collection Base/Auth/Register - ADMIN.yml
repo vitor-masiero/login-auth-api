@@ -11,10 +11,10 @@ http:
     data: |-
       {
         "nome": "Admin",
-        "email": "admin@gmail.com",
+        "email": "novoteste2@gmail.com",
         "telefone": "11999999999",
         "endereco": "Rua das Flores, 123",
-        "senha": "admin123456",
+        "senha": "teste12345",
         "role": "ADMIN"
       }
   auth: inherit
