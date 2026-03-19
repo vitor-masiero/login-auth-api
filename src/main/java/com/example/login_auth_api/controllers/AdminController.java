@@ -19,6 +19,7 @@ public class AdminController {
 
         private final UserService userService;
 
+
         @GetMapping("/users")
         public ResponseEntity<List<UserResponseDTO>> listAllUsers(Pageable pageable) {
             return ResponseEntity.ok(userService.listarUsuariosComPaginacao(pageable).getContent());
