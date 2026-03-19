@@ -1,0 +1,12 @@
+opencollection: 1.0.0
+info:
+  name: "Login-Auth-API"
+  type: workspace
+
+collections:
+  - name: "Collection Base"
+    path: "collections/Collection Base"
+
+specs:
+
+docs: ''
