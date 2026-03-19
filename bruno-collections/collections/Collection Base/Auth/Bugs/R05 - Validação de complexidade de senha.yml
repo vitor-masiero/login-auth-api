@@ -1,0 +1,39 @@
+info:
+  name: R05 - Validação de complexidade de senha
+  type: http
+  seq: 2
+
+http:
+  method: POST
+  url: "{{baseURL}}/auth/register"
+  body:
+    type: json
+    data: |-
+      {
+        "nome": "Admin",
+        "email": "novoteste@gmail.com",
+        "telefone": "11999999999",
+        "endereco": "Rua das Flores, 123",
+        "senha": "testedojose", //senha sem complexidade
+        "role": "ADMIN"
+      }
+  auth: inherit
+
+runtime:
+  scripts:
+    - type: after-response
+      code: |-
+        if (res.getStatus() === 200) {
+          const data = res.getBody();
+         
+          if (data.token) {
+            bru.setVar("token", data.token);
+            console.log("Token salvo com sucesso!");
+          }
+        }
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5
