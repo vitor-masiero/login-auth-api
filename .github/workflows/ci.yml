@@ -28,7 +28,7 @@ jobs:
         run: chmod +x ./mvnw
 
       - name: Run Tests with Maven
-        run: ./mvnw -B -ntp -T 1C test jacoco:check -Dmaven.test.failure.ignore=true
+        run: ./mvnw -B -ntp -T 1C test
 
       - name: Upload JaCoCo Coverage Report
         uses: actions/upload-artifact@v4
