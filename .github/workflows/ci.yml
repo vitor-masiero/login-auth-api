@@ -31,7 +31,7 @@ jobs:
         run: ./mvnw test -Dmaven.test.failure.ignore=true
 
       - name: Upload JaCoCo Coverage Report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always() # Faz upload do relatório mesmo se alguns testes falharem
         with:
           name: jacoco-report
